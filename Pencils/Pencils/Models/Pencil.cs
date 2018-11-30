@@ -28,12 +28,14 @@ namespace Pencils.Models
         {
             foreach (char c in toWrite)
             {
-                if (!char.IsWhiteSpace(c))
-                {
-                    PointDurability--;
-                }
+                int durabilityDeduction =
+                    char.IsWhiteSpace(c)
+                    ? 0
+                    : char.IsUpper(c) 
+                        ? 2
+                        : 1;
 
-                
+                PointDurability -= durabilityDeduction;
                 page.Contents += c;
             }
 

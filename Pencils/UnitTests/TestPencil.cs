@@ -46,8 +46,8 @@ namespace UnitTests
             Assert.AreEqual(9992, testPencil.PointDurability);
 
             // Should use 5 durability -- capital
-            //testPencil.WriteToPage("Five", testPage);
-            //Assert.AreEqual(9987, testPencil.PointDurability);
+            testPencil.WriteToPage("Five", testPage);
+            Assert.AreEqual(9987, testPencil.PointDurability);
         }
     }
 }
