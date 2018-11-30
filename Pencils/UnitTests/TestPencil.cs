@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Pencils.Models;
 
 namespace UnitTests
 {
@@ -7,8 +8,12 @@ namespace UnitTests
     public class TestPencil
     {
         [TestMethod]
-        public void TestMethod1()
+        public void TestPencilWriteToPage()
         {
+            var page = new Page();
+            var pencil = new Pencil();
+            pencil.WriteToPage("lorem ipsum", page);
+            Assert.AreEqual("lorem ipsum", page.Contents);
         }
     }
 }

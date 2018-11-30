@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace Pencils.Models
 {
-    public class Pencil
+    public class Page
     {
-        public void WriteToPage(string toWrite, Page page)
-        {
-            page.Contents += toWrite;
-        }
+        // The contents of the page, initialized to empty
+        public string Contents { get; set; } = "";
     }
 }
