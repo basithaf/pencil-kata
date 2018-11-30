@@ -48,6 +48,18 @@ namespace UnitTests
             // Should use 5 durability -- capital
             testPencil.WriteToPage("Five", testPage);
             Assert.AreEqual(9987, testPencil.PointDurability);
+
+            // Reset pencil and page to test running out of durability
+            testPencil = new Pencil(5);
+            testPage = new Page();
+
+            // Don't write chars if not enough durability
+            testPencil.WriteToPage("enough", testPage);
+            Assert.AreEqual("enoug", testPage.Contents);
+
+            // Even with no durability, we should still be able to write whitespace
+            testPencil.WriteToPage(" \t\n", testPage);
+            Assert.AreEqual("enoug \t\n", testPage.Contents);
         }
     }
 }

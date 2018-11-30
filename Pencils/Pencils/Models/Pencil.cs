@@ -26,8 +26,10 @@ namespace Pencils.Models
 
         public void WriteToPage(string toWrite, Page page)
         {
+            // Add character by character
             foreach (char c in toWrite)
             {
+                // Calculate durability used for this character
                 int durabilityDeduction =
                     char.IsWhiteSpace(c)
                     ? 0
@@ -35,6 +37,10 @@ namespace Pencils.Models
                         ? 2
                         : 1;
 
+                // If not enough durability in pencil, we can't continue
+                if (PointDurability < durabilityDeduction) { break; }
+
+                // Write character and adjust durability
                 PointDurability -= durabilityDeduction;
                 page.Contents += c;
             }
