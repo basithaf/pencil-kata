@@ -8,17 +8,17 @@ namespace Pencils.Models
 {
     public class Pencil
     {
-        private const uint DEFAULT_MAX_DURABILITY = 10000;
+        private const int DEFAULT_MAX_DURABILITY = 10000;
 
         // The number of characters that can be written with a sharp point
-        private uint MaxPointDurability { get; }
+        private int MaxPointDurability { get; }
 
         // lowercase characters use 1 durability, uppercase use 2
-        public uint PointDurability { get; private set; }
+        public int PointDurability { get; private set; }
 
         
         
-        public Pencil(uint maxDurability = DEFAULT_MAX_DURABILITY)
+        public Pencil(int maxDurability = DEFAULT_MAX_DURABILITY)
         {
             MaxPointDurability = PointDurability = maxDurability;
             
@@ -28,7 +28,12 @@ namespace Pencils.Models
         {
             foreach (char c in toWrite)
             {
-                PointDurability--;
+                if (!char.IsWhiteSpace(c))
+                {
+                    PointDurability--;
+                }
+
+                
                 page.Contents += c;
             }
 

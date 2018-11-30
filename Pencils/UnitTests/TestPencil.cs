@@ -39,11 +39,15 @@ namespace UnitTests
         {
             // Should use 4 durability
             testPencil.WriteToPage("four", testPage);
-            Assert.AreEqual<uint>(9996, testPencil.PointDurability);
+            Assert.AreEqual(9996, testPencil.PointDurability);
 
-            // Should also use 4 durability
-            //testPencil.WriteToPage(" four ", testPage);
-            //Assert.AreEqual(9992, testPencil.PointDurability);
+            // Should also use 4 durability -- whitespace
+            testPencil.WriteToPage(" four \t\n", testPage);
+            Assert.AreEqual(9992, testPencil.PointDurability);
+
+            // Should use 5 durability -- capital
+            //testPencil.WriteToPage("Five", testPage);
+            //Assert.AreEqual(9987, testPencil.PointDurability);
         }
     }
 }
