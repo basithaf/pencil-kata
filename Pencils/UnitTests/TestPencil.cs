@@ -112,5 +112,22 @@ namespace UnitTests
             testPencil.Erase("three", testPage);
             Assert.AreEqual("one two      ", testPage.Contents);
         }
+
+        [TestMethod]
+        public void TestEraseLastOccurrence()
+        {
+            // Should replace the last occurrence with whitespace
+            testPencil.WriteToPage("la la la", testPage);
+            testPencil.Erase("la", testPage);
+            Assert.AreEqual("la la   ", testPage.Contents);
+            testPencil.Erase("la", testPage);
+            Assert.AreEqual("la      ", testPage.Contents);
+            testPencil.Erase("la", testPage);
+            Assert.AreEqual("        ", testPage.Contents);
+
+            // This should leave the string as-is!
+            testPencil.Erase("la", testPage);
+            Assert.AreEqual("        ", testPage.Contents);
+        }
     }
 }

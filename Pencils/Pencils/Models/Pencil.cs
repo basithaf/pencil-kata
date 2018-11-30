@@ -69,13 +69,22 @@ namespace Pencils.Models
         }
 
         /// <summary>
-        /// Erase the input string from the page
+        /// Erase the input string from the page by replacing it with whitespace
         /// </summary>
         /// <param name="toErase"></param>
         /// <param name="page"></param>
         public void Erase(string toErase, Page page)
         {
-            page.Contents = page.Contents.Replace(toErase, new string(' ', toErase.Length));
+            // Index of last occurrence
+            var lastPlace = page.Contents.LastIndexOf(toErase);
+
+            // If the string toErase doesn't occur, we do nothing
+            if (lastPlace == -1) { return; }
+
+            // Replace with whitespace
+            var length = toErase.Length;
+            var whitespace = new string(' ', length);
+            page.Contents = page.Contents.Remove(lastPlace, length).Insert(lastPlace, whitespace);
         }
     }
 }
