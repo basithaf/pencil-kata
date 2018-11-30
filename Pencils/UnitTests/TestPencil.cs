@@ -103,7 +103,14 @@ namespace UnitTests
             testPencil.Sharpen();
             Assert.AreEqual(currentDurability, testPencil.PointDurability);
             Assert.AreEqual(0, testPencil.CurrentLength);
+        }
 
+        [TestMethod]
+        public void TestErase()
+        {
+            testPencil.WriteToPage("one two three", testPage);
+            testPencil.Erase("three", testPage);
+            Assert.AreEqual("one two      ", testPage.Contents);
         }
     }
 }

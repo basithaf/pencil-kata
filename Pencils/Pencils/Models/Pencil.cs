@@ -27,6 +27,11 @@ namespace Pencils.Models
             CurrentLength = initialLength;
         }
 
+        /// <summary>
+        /// Writes the input string to the given page, pending durability
+        /// </summary>
+        /// <param name="toWrite"></param>
+        /// <param name="page"></param>
         public void WriteToPage(string toWrite, Page page)
         {
             // Add character by character
@@ -61,6 +66,16 @@ namespace Pencils.Models
                 CurrentLength--;
                 PointDurability = MaxPointDurability;
             }
+        }
+
+        /// <summary>
+        /// Erase the input string from the page
+        /// </summary>
+        /// <param name="toErase"></param>
+        /// <param name="page"></param>
+        public void Erase(string toErase, Page page)
+        {
+            page.Contents = page.Contents.Replace(toErase, new string(' ', toErase.Length));
         }
     }
 }
