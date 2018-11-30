@@ -8,7 +8,8 @@ namespace Pencils.Models
 {
     public class Pencil
     {
-        private const int DEFAULT_MAX_DURABILITY = 10000;
+        public const int DEFAULT_MAX_DURABILITY = 10000;
+        public const int DEFAULT_INITIAL_LENGTH = 8;
 
         // The number of characters that can be written with a sharp point
         private int MaxPointDurability { get; }
@@ -16,12 +17,14 @@ namespace Pencils.Models
         // lowercase characters use 1 durability, uppercase use 2
         public int PointDurability { get; private set; }
 
-        
-        
-        public Pencil(int maxDurability = DEFAULT_MAX_DURABILITY)
+        // Sharpening uses 1 unit of length
+        public int CurrentLength { get; private set; }
+
+        public Pencil(int maxDurability = DEFAULT_MAX_DURABILITY, int initialLength = DEFAULT_INITIAL_LENGTH)
         {
-            MaxPointDurability = PointDurability = maxDurability;
-            
+            // initialize PointDurability and store the maximum for sharpening
+            PointDurability = MaxPointDurability = maxDurability;
+            CurrentLength = initialLength;
         }
 
         public void WriteToPage(string toWrite, Page page)
@@ -46,6 +49,18 @@ namespace Pencils.Models
             }
 
             
+        }
+
+        /// <summary>
+        /// Returns PointDurability to it's maximum value for this Pencil
+        /// </summary>
+        public void Sharpen()
+        {
+            if (CurrentLength > 0)
+            {
+                CurrentLength--;
+                PointDurability = MaxPointDurability;
+            }
         }
     }
 }
