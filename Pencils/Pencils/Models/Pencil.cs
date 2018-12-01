@@ -122,14 +122,22 @@ namespace Pencils.Models
         {
             var newContent = page.Contents;
 
+            // invalid index given
+            if (position < 0) { return; }
+
             foreach (char c in toInsert)
             {
                 var durabilityDeduction = GetDurabilityDeduction(c);
                 // For Edit, if we don't have durability, we skip this character
                 if (PointDurability < durabilityDeduction) { continue; }
 
+                // If we're at the end of the string, just add the new characters
+                if (position == newContent.Length)
+                {
+                    newContent += c;
+                }
                 // If there is whitespace in the string, write whatever is in toInsert
-                if (char.IsWhiteSpace(newContent[position]))
+                else if (char.IsWhiteSpace(newContent[position]))
                 {
                     newContent = ReplacePositionInString(newContent, position, c.ToString());
                 }

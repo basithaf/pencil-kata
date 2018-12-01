@@ -194,9 +194,18 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void TestEditEndOfPage()
+        public void TestEditEdgeCases()
         {
-            // What should behavior be here...?
+            // Invalid Index
+            testPage.Contents = " do you mean";
+            testPencil.Edit(-1, "what", testPage);
+            Assert.AreEqual(" do you mean", testPage.Contents);
+            Assert.AreEqual(Pencil.DEFAULT_MAX_DURABILITY, testPencil.PointDurability);
+
+            // Hit end of the page -- should continue to write
+            testPencil.Edit(10, "  der", testPage);
+            Assert.AreEqual(" do you meander", testPage.Contents);
+            Assert.AreEqual(Pencil.DEFAULT_MAX_DURABILITY - 3, testPencil.PointDurability);
         }
     }
 }
