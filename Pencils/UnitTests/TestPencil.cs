@@ -129,5 +129,32 @@ namespace UnitTests
             testPencil.Erase("la", testPage);
             Assert.AreEqual("        ", testPage.Contents);
         }
+
+        [TestMethod]
+        public void TestEraserDurability()
+        {
+            var eraserDurability = Pencil.DEFAULT_ERASER_DURABILITY;
+
+            testPencil.WriteToPage("this will be erased", testPage);
+
+            // Should use 6
+            testPencil.Erase("erased", testPage);
+            Assert.AreEqual(eraserDurability -= 6, testPencil.EraserDurability);
+            
+            // Erasing whitespace doesn't use durability
+            testPencil.Erase("be ", testPage);
+            Assert.AreEqual(eraserDurability -= 2, testPencil.EraserDurability);
+
+            // Check what happens if durability runs out
+            testPencil = new Pencil(eraserDurability: 3);
+            testPencil.Erase("will", testPage);
+            Assert.AreEqual("this w             ", testPage.Contents);
+            Assert.AreEqual(0, testPencil.EraserDurability);
+
+            // Nothing should change at this step
+            testPencil.Erase("this", testPage);
+            Assert.AreEqual("this w             ", testPage.Contents);
+            Assert.AreEqual(0, testPencil.EraserDurability);
+        }
     }
 }
