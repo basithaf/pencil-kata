@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="TestPencil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestWriterViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
