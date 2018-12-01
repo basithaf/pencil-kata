@@ -59,8 +59,24 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Converters.cs" />
     <Compile Include="ViewModels\WriterViewModel.cs" />
     <Compile Include="SimpleVmCommand.cs" />
+    <Compile Include="Views\NewPencilView.xaml.cs">
+      <DependentUpon>NewPencilView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PageView.xaml.cs">
+      <DependentUpon>PageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PencilStatsView.xaml.cs">
+      <DependentUpon>PencilStatsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PencilView.xaml.cs">
+      <DependentUpon>PencilView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PencilWriteView.xaml.cs">
+      <DependentUpon>PencilWriteView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WriterView.xaml.cs">
       <DependentUpon>WriterView.xaml</DependentUpon>
     </Compile>
@@ -96,6 +112,30 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="Views\NewPencilView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PencilStatsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PencilView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PencilWriteView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WriterResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\WriterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Pencils.ViewModels;
+using Pencils.Views;
 using System.Windows;
 
 namespace Pencils
@@ -12,7 +8,8 @@ namespace Pencils
     {
         private void StartApp(object sender, StartupEventArgs e)
         {
-
+            var writer = new WriterView { DataContext = new WriterViewModel() };
+            writer.Show();
         }
     }
 }
