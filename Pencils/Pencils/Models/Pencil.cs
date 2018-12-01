@@ -45,14 +45,9 @@ namespace Pencils.Models
             foreach (char c in toWrite)
             {
                 // Calculate durability used for this character
-                int durabilityDeduction =
-                    char.IsWhiteSpace(c)
-                    ? 0
-                    : char.IsUpper(c) 
-                        ? 2
-                        : 1;
+                int durabilityDeduction = GetDurabilityDeduction(c);
 
-                // If not enough durability in pencil, we can't continue
+                // If not enough durability in pencil, we can only write whitespace
                 if (PointDurability < durabilityDeduction)
                 {
                     page.Contents += ' ';
@@ -107,13 +102,59 @@ namespace Pencils.Models
                 if (!char.IsWhiteSpace(newContent[currentCharPlace])) { EraserDurability--; }
 
                 // Replace character
-                newContent = newContent.Remove(currentCharPlace, 1).Insert(currentCharPlace, " ");
+                newContent = ReplacePositionInString(newContent, currentCharPlace, " ");
 
                 currentCharPlace--;
             }
 
             // Set page contents
             page.Contents = newContent;
+        }
+
+        /// <summary>
+        /// Try to overwrite from the startPosition in the given page
+        /// Writes '@' if there is a character already in a space
+        /// </summary>
+        /// <param name="startPosition"></param>
+        /// <param name="toInsert"></param>
+        /// <param name="page"></param>
+        public void Edit(int position, string toInsert, Page page)
+        {
+            var newContent = page.Contents;
+
+            foreach (char c in toInsert)
+            {
+                var durabilityDeduction = GetDurabilityDeduction(c);
+                // For Edit, if we don't have durability, we skip this character
+                if (PointDurability < durabilityDeduction) { continue; }
+
+                // If there is whitespace in the string, write whatever is in toInsert
+                if (char.IsWhiteSpace(newContent[position]))
+                {
+                    newContent = ReplacePositionInString(newContent, position, c.ToString());
+                }
+                // if the string and our edit both have non-whitespace, write an '@'
+                else if (!char.IsWhiteSpace(c))
+                {
+                    newContent = ReplacePositionInString(newContent, position, "@");
+                }
+                // otherwise c is whitespace, so we don't change anything
+                PointDurability -= durabilityDeduction;
+
+                position++;
+            }
+
+            page.Contents = newContent;
+        }
+
+        private int GetDurabilityDeduction(char c)
+        {
+            return char.IsWhiteSpace(c) ? 0 : char.IsUpper(c) ? 2 : 1;
+        }
+
+        private string ReplacePositionInString(string s, int position, string toInsert)
+        {
+            return s.Remove(position, 1).Insert(position, toInsert);
         }
     }
 }

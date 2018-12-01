@@ -118,7 +118,7 @@ namespace UnitTests
         [TestMethod]
         public void TestErase()
         {
-            testPencil.WriteToPage("one two three", testPage);
+            testPage.Contents = "one two three";
             testPencil.Erase("three", testPage);
             Assert.AreEqual("one two      ", testPage.Contents);
         }
@@ -127,7 +127,7 @@ namespace UnitTests
         public void TestEraseLastOccurrence()
         {
             // Should replace the last occurrence with whitespace
-            testPencil.WriteToPage("la la la", testPage);
+            testPage.Contents = "la la la";
             testPencil.Erase("la", testPage);
             Assert.AreEqual("la la   ", testPage.Contents);
             testPencil.Erase("la", testPage);
@@ -145,7 +145,7 @@ namespace UnitTests
         {
             var eraserDurability = Pencil.DEFAULT_ERASER_DURABILITY;
 
-            testPencil.WriteToPage("this will be erased", testPage);
+            testPage.Contents = "this will be erased";
 
             // Should use 6
             testPencil.Erase("erased", testPage);
@@ -154,23 +154,49 @@ namespace UnitTests
             // Erasing whitespace doesn't use durability
             testPencil.Erase("be ", testPage);
             Assert.AreEqual(eraserDurability -= 2, testPencil.EraserDurability);
+        }
+
+        [TestMethod]
+        public void TestEraserDurabilityRunsOut()
+        {
+            testPage.Contents = "this will";
 
             // Check what happens if durability runs out
             testPencil = new Pencil(eraserDurability: 3);
             testPencil.Erase("will", testPage);
-            Assert.AreEqual("this w             ", testPage.Contents);
+            Assert.AreEqual("this w   ", testPage.Contents);
             Assert.AreEqual(0, testPencil.EraserDurability);
 
             // Nothing should change at this step
             testPencil.Erase("this", testPage);
-            Assert.AreEqual("this w             ", testPage.Contents);
+            Assert.AreEqual("this w   ", testPage.Contents);
             Assert.AreEqual(0, testPencil.EraserDurability);
         }
 
         [TestMethod]
         public void TestEdit()
         {
+            // Edit with enough whitespace
+            testPage.Contents = "what    you mean";
+            testPencil.Edit(5, "do", testPage);
+            Assert.AreEqual("what do you mean", testPage.Contents);
+            Assert.AreEqual(Pencil.DEFAULT_MAX_DURABILITY - 2, testPencil.PointDurability);
+        }
 
+        [TestMethod]
+        public void TestEditClash()
+        {
+            // Edit without enough whitespace
+            testPage.Contents = "what  you mean";
+            testPencil.Edit(5, "do", testPage);
+            Assert.AreEqual("what d@ou mean", testPage.Contents);
+            Assert.AreEqual(Pencil.DEFAULT_MAX_DURABILITY - 2, testPencil.PointDurability);
+        }
+
+        [TestMethod]
+        public void TestEditEndOfPage()
+        {
+            // What should behavior be here...?
         }
     }
 }
