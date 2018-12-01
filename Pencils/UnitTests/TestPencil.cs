@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Pencils.Models;
 
 namespace UnitTests
@@ -60,13 +59,24 @@ namespace UnitTests
             // Use a low-durability pencil for simplicity
             testPencil = new Pencil(5);
 
-            // Don't write chars if not enough durability
+            // Write whitespace if not enough durability
             testPencil.WriteToPage("enough", testPage);
-            Assert.AreEqual("enoug", testPage.Contents);
+            Assert.AreEqual("enoug ", testPage.Contents);
 
             // Even with no durability, we should still be able to write whitespace
-            testPencil.WriteToPage(" \t\n", testPage);
-            Assert.AreEqual("enoug \t\n", testPage.Contents);
+            testPencil.WriteToPage(" \t\nextra", testPage);
+            Assert.AreEqual("enoug  \t\n     ", testPage.Contents);
+        }
+
+        [TestMethod]
+        public void TestDurabilityPartiallyRunsOut()
+        {
+            // Use a low-durability pencil for simplicity
+            testPencil = new Pencil(3);
+
+            // This should skip the capital 'A' but write the lowercase 'r'
+            testPencil.WriteToPage("we Are", testPage);
+            Assert.AreEqual("we  r ", testPage.Contents);
         }
 
         [TestMethod]
@@ -155,6 +165,12 @@ namespace UnitTests
             testPencil.Erase("this", testPage);
             Assert.AreEqual("this w             ", testPage.Contents);
             Assert.AreEqual(0, testPencil.EraserDurability);
+        }
+
+        [TestMethod]
+        public void TestEdit()
+        {
+
         }
     }
 }

@@ -53,14 +53,17 @@ namespace Pencils.Models
                         : 1;
 
                 // If not enough durability in pencil, we can't continue
-                if (PointDurability < durabilityDeduction) { break; }
-
-                // Write character and adjust durability
-                PointDurability -= durabilityDeduction;
-                page.Contents += c;
+                if (PointDurability < durabilityDeduction)
+                {
+                    page.Contents += ' ';
+                }
+                else
+                {
+                    // Write character and adjust durability
+                    PointDurability -= durabilityDeduction;
+                    page.Contents += c;
+                }
             }
-
-            
         }
 
         /// <summary>
