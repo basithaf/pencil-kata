@@ -9,6 +9,6 @@ namespace Pencils.Models
     public class Page
     {
         // The contents of the page, initialized to empty
-        public string Contents { get; set; } = "";
+        public Observable<string> Contents { get; } = new Observable<string>("");
     }
 }

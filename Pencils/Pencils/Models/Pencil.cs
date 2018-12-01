@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Pencils.Models
+﻿namespace Pencils.Models
 {
     public class Pencil
     {
@@ -13,25 +7,25 @@ namespace Pencils.Models
         public const int DEFAULT_INITIAL_LENGTH = 8;
 
         // The number of characters that can be written with a sharp point
-        private int MaxPointDurability { get; }
+        private int maxPointDurability { get; }
 
         // lowercase characters use 1 durability, uppercase use 2
-        public int PointDurability { get; private set; }
+        public Observable<int> PointDurability { get; }
 
         // Erasing non-whitespace characters uses 1 durability/character
-        public int EraserDurability { get; private set; }
+        public Observable<int> EraserDurability { get; }
 
         // Sharpening uses 1 unit of length
-        public int CurrentLength { get; private set; }
+        public Observable<int> CurrentLength { get; }
 
         public Pencil(int maxDurability = DEFAULT_MAX_DURABILITY, 
             int initialLength = DEFAULT_INITIAL_LENGTH, 
             int eraserDurability = DEFAULT_ERASER_DURABILITY)
         {
             // initialize PointDurability and store the maximum for sharpening
-            PointDurability = MaxPointDurability = maxDurability;
-            CurrentLength = initialLength;
-            EraserDurability = eraserDurability;
+            PointDurability = new Observable<int>(maxPointDurability = maxDurability);
+            CurrentLength = new Observable<int>(initialLength);
+            EraserDurability = new Observable<int>(eraserDurability);
         }
 
         /// <summary>
@@ -48,15 +42,15 @@ namespace Pencils.Models
                 int durabilityDeduction = GetDurabilityDeduction(c);
 
                 // If not enough durability in pencil, we can only write whitespace
-                if (PointDurability < durabilityDeduction)
+                if (PointDurability.Value < durabilityDeduction)
                 {
-                    page.Contents += ' ';
+                    page.Contents.Value += ' ';
                 }
                 else
                 {
                     // Write character and adjust durability
-                    PointDurability -= durabilityDeduction;
-                    page.Contents += c;
+                    PointDurability.Value -= durabilityDeduction;
+                    page.Contents.Value += c;
                 }
             }
         }
@@ -66,10 +60,10 @@ namespace Pencils.Models
         /// </summary>
         public void Sharpen()
         {
-            if (CurrentLength > 0)
+            if (CurrentLength.Value > 0)
             {
-                CurrentLength--;
-                PointDurability = MaxPointDurability;
+                CurrentLength.Value--;
+                PointDurability.Value = maxPointDurability;
             }
         }
 
@@ -81,7 +75,7 @@ namespace Pencils.Models
         public void Erase(string toErase, Page page)
         {
             // Index of last occurrence
-            var lastPlace = page.Contents.LastIndexOf(toErase);
+            var lastPlace = page.Contents.Value.LastIndexOf(toErase);
 
             // If the string toErase doesn't occur, we do nothing
             if (lastPlace == -1) { return; }
@@ -91,15 +85,15 @@ namespace Pencils.Models
 
             // Start with the last char of the string and work backwards as 
             // durability allows
-            var newContent = page.Contents;
+            var newContent = page.Contents.Value;
 
             while (currentCharPlace >= lastPlace)
             {
                 // Stop if no eraser durability left
-                if (EraserDurability <= 0) { break; }
+                if (EraserDurability.Value <= 0) { break; }
 
                 // Use durability if character isn't whitespace
-                if (!char.IsWhiteSpace(newContent[currentCharPlace])) { EraserDurability--; }
+                if (!char.IsWhiteSpace(newContent[currentCharPlace])) { EraserDurability.Value--; }
 
                 // Replace character
                 newContent = ReplacePositionInString(newContent, currentCharPlace, " ");
@@ -108,7 +102,7 @@ namespace Pencils.Models
             }
 
             // Set page contents
-            page.Contents = newContent;
+            page.Contents.Value = newContent;
         }
 
         /// <summary>
@@ -120,7 +114,7 @@ namespace Pencils.Models
         /// <param name="page"></param>
         public void Edit(int position, string toInsert, Page page)
         {
-            var newContent = page.Contents;
+            var newContent = page.Contents.Value;
 
             // invalid index given
             if (position < 0) { return; }
@@ -129,7 +123,7 @@ namespace Pencils.Models
             {
                 var durabilityDeduction = GetDurabilityDeduction(c);
                 // For Edit, if we don't have durability, we skip this character
-                if (PointDurability < durabilityDeduction) { continue; }
+                if (PointDurability.Value < durabilityDeduction) { continue; }
 
                 // If we're at the end of the string, just add the new characters
                 if (position == newContent.Length)
@@ -147,12 +141,12 @@ namespace Pencils.Models
                     newContent = ReplacePositionInString(newContent, position, "@");
                 }
                 // otherwise c is whitespace, so we don't change anything
-                PointDurability -= durabilityDeduction;
+                PointDurability.Value -= durabilityDeduction;
 
                 position++;
             }
 
-            page.Contents = newContent;
+            page.Contents.Value = newContent;
         }
 
         private int GetDurabilityDeduction(char c)
