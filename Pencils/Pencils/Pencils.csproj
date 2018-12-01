@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Models\Page.cs" />
     <Compile Include="Models\Pencil.cs" />
+    <Compile Include="Observable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
