@@ -24,6 +24,9 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -56,5 +59,12 @@
         <TextBlock Grid.Column="4" Grid.Row="1"
                    Style="{StaticResource PencilStatsTextStyle}"
                    Text="{Binding CurrentPencil.Value.CurrentLength.Value}"/>
+
+        <Separator Grid.Column="5" Grid.Row="0" Grid.RowSpan="2"
+                   Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+
+        <Button Grid.Column="7" Grid.Row="0"
+                Content="Sharpen Pencil"
+                Command="{Binding SharpenCommand}"/>
     </Grid>
 </UserControl>

@@ -7,7 +7,7 @@
         xmlns:vms="clr-namespace:Pencils.ViewModels"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=vms:WriterViewModel, IsDesignTimeCreatable=False}"
-        Title="Pencil Simulator 2018" Height="450" Width="800">
+        Title="Pencil Simulator 2018" Height="600" Width="800">
 
     <Window.Resources>
         <ResourceDictionary>

@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:pencils="clr-namespace:Pencils"
              xmlns:vms="clr-namespace:Pencils.ViewModels"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=vms:WriterViewModel, IsDesignTimeCreatable=False}" 
@@ -19,8 +18,6 @@
                    x:Key="NewPencilInputNumbersStyle">
                 <EventSetter Event="PreviewTextInput" Handler="TextBox_PreviewTextInput"/>
             </Style>
-
-            <pencils:IntToStringConverter x:Key="IntToStringConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
 
