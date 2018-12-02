@@ -19,17 +19,21 @@ namespace Pencils.ViewModels
         public Observable<int> EditPlace { get; } = 
             new Observable<int>(0);
 
-        public Observable<int> NewPencilDurability =
+        public Observable<int> NewPencilDurability { get; } =
             new Observable<int>(Pencil.DEFAULT_MAX_DURABILITY);
-        public Observable<int> NewPencilEraserDurability =
+        public Observable<int> NewPencilEraserDurability { get; } =
             new Observable<int>(Pencil.DEFAULT_ERASER_DURABILITY);
-        public Observable<int> NewPencilLength =
+        public Observable<int> NewPencilLength { get; } =
             new Observable<int>(Pencil.DEFAULT_INITIAL_LENGTH);
         #endregion Properties
 
         #region Commands
-        public readonly ICommand WriteCommand, EraseCommand, 
-            EditCommand, SharpenCommand, NewPencilCommand, NewPageCommand;
+        public ICommand WriteCommand { get; } 
+        public ICommand EraseCommand { get; } 
+        public ICommand EditCommand { get; } 
+        public ICommand SharpenCommand { get; } 
+        public ICommand NewPencilCommand { get; } 
+        public ICommand NewPageCommand { get; } 
         #endregion Commands
 
         #region Methods
