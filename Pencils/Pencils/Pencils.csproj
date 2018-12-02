@@ -68,6 +68,9 @@
     <Compile Include="Views\PageView.xaml.cs">
       <DependentUpon>PageView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PencilEraseView.xaml.cs">
+      <DependentUpon>PencilEraseView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PencilStatsView.xaml.cs">
       <DependentUpon>PencilStatsView.xaml</DependentUpon>
     </Compile>
@@ -117,6 +120,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PencilEraseView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

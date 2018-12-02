@@ -28,6 +28,10 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <views:PencilStatsView Grid.Column="0" Grid.Row="0"
@@ -41,5 +45,9 @@
         <views:PencilWriteView Grid.Column="0" Grid.Row="4"
                                Style="{StaticResource MinorSectionStyle}"/>
         <Separator Grid.Column="0" Grid.Row="5"/>
+
+        <views:PencilEraseView Grid.Column="0" Grid.Row="6"
+                               Style="{StaticResource MinorSectionStyle}"/>
+        <Separator Grid.Column="0" Grid.Row="7"/>
     </Grid>
 </UserControl>
