@@ -1,6 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:Pencils.Views"
                     xmlns:pencils="clr-namespace:Pencils">
 
     <pencils:IntToStringConverter x:Key="IntToStringConverter"/>

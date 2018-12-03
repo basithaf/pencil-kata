@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Pencils.Views"
+             xmlns:pencils="clr-namespace:Pencils"
              xmlns:vms="clr-namespace:Pencils.ViewModels"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=vms:WriterViewModel, IsDesignTimeCreatable=False}" 
@@ -26,9 +26,10 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBox Grid.Column="0" Grid.Row="0"
-                 Style="{StaticResource PageContentsStyle}"
-                 Text="{Binding CurrentPage.Value.Contents.Value}"
+        <pencils:BindableCaretTextBox Grid.Column="0" Grid.Row="0"
+                                      Style="{StaticResource PageContentsStyle}"
+                                      Text="{Binding CurrentPage.Value.Contents.Value}"
+                                      BindableCaretIndex="{Binding EditPlace.Value, Mode=TwoWay}"
                  ToolTip="Change contents with Write/Erase/Edit above"/>
         <Button Grid.Column="0" Grid.Row="1"
                 Content="New Page" Command="{Binding NewPageCommand}"/>
