@@ -59,6 +59,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BindableCaretTextBox.cs" />
     <Compile Include="Converters.cs" />
     <Compile Include="ViewModels\WriterViewModel.cs" />
     <Compile Include="SimpleVmCommand.cs" />
