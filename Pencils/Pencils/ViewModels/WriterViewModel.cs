@@ -3,6 +3,10 @@ using System.Windows.Input;
 
 namespace Pencils.ViewModels
 {
+    /// <summary>
+    /// Exposes various Pencil properties and methods for use
+    /// with WriterView
+    /// </summary>
     public class WriterViewModel
     {
         #region Properties

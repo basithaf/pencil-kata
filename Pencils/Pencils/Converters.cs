@@ -3,6 +3,9 @@ using System.Windows.Data;
 
 namespace Pencils
 {
+    /// <summary>
+    /// A simple converter for displaying/binding a code-behind int as a string
+    /// </summary>
     public class IntToStringConverter : IValueConverter {
 
         // int -> string;

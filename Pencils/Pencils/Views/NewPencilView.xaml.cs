@@ -4,9 +4,6 @@ using System.Windows.Input;
 
 namespace Pencils.Views
 {
-    /// <summary>
-    /// Interaction logic for NewPencilView.xaml
-    /// </summary>
     public partial class NewPencilView : UserControl
     {
         public NewPencilView()
