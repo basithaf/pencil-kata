@@ -28,7 +28,8 @@
 
         <TextBox Grid.Column="0" Grid.Row="0"
                  Style="{StaticResource PageContentsStyle}"
-                 Text="{Binding CurrentPage.Value.Contents.Value}"/>
+                 Text="{Binding CurrentPage.Value.Contents.Value}"
+                 ToolTip="Change contents with Write/Erase/Edit above"/>
         <Button Grid.Column="0" Grid.Row="1"
                 Content="New Page" Command="{Binding NewPageCommand}"/>
     </Grid>

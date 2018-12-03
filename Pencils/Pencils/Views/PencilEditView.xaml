@@ -14,7 +14,7 @@
                 <ResourceDictionary Source="WriterResources.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <Style TargetType="TextBox" BasedOn="{StaticResource NewPencilInputStyle}"
+            <Style TargetType="TextBox" BasedOn="{StaticResource InputBaseStyle}"
                    x:Key="EditInputNumbersStyle">
                 <EventSetter Event="PreviewTextInput" Handler="TextBox_PreviewTextInput"/>
                 <Setter Property="Width" Value="80"/>
@@ -26,9 +26,10 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="0.4*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -43,13 +44,16 @@
                  Text="{Binding EditString.Value, Mode=TwoWay}"/>
         
         <Label Grid.Column="2" Grid.Row="0"
-               Style="{StaticResource PencilActionLabelStyle}"
-               Content="Start Index: "/>
+               Style="{StaticResource PencilActionMiniLabelStyle}"
+               Content="Start Index: "
+               ToolTip="Zero-based index to insert text"/>
         <TextBox Grid.Column="3" Grid.Row="0"
                  Style="{StaticResource EditInputNumbersStyle}"
-                 Text="{Binding EditPlace.Value, Mode=TwoWay, Converter={StaticResource IntToStringConverter}}"/>
+                 Text="{Binding EditPlace.Value, Mode=TwoWay, 
+                        Converter={StaticResource IntToStringConverter}}"
+                 ToolTip="Zero-based index to insert text"/>
 
-        <Button Grid.Column="4" Grid.Row="0"
+        <Button Grid.Column="5" Grid.Row="0"
                 Content="Edit Page"
                 Command="{Binding EditCommand}"/>            
     </Grid>

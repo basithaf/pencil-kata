@@ -14,9 +14,10 @@
                 <ResourceDictionary Source="WriterResources.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <Style TargetType="TextBox" BasedOn="{StaticResource NewPencilInputStyle}"
-                   x:Key="NewPencilInputNumbersStyle">
+            <Style TargetType="TextBox" BasedOn="{StaticResource InputBaseStyle}"
+                   x:Key="NewPencilInputStyle">
                 <EventSetter Event="PreviewTextInput" Handler="TextBox_PreviewTextInput"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -30,6 +31,7 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -40,7 +42,7 @@
                Style="{StaticResource PencilStatsLabelStyle}"
                Content="New Point Durability: "/>
         <TextBox Grid.Column="0" Grid.Row="1"
-                   Style="{StaticResource NewPencilInputNumbersStyle}"
+                   Style="{StaticResource NewPencilInputStyle}"
                    Text="{Binding NewPencilDurability.Value, Mode=TwoWay, 
                           Converter={StaticResource IntToStringConverter}}"/>
 
@@ -51,7 +53,7 @@
                Style="{StaticResource PencilStatsLabelStyle}"
                Content="New Eraser Durability: "/>
         <TextBox Grid.Column="2" Grid.Row="1"
-                   Style="{StaticResource NewPencilInputNumbersStyle}"
+                   Style="{StaticResource NewPencilInputStyle}"
                    Text="{Binding NewPencilEraserDurability.Value, Mode=TwoWay,
                           Converter={StaticResource IntToStringConverter}}"/>
 
@@ -62,14 +64,14 @@
                Style="{StaticResource PencilStatsLabelStyle}"
                Content="New Pencil Length: "/>
         <TextBox Grid.Column="4" Grid.Row="1"
-                   Style="{StaticResource NewPencilInputNumbersStyle}"
+                   Style="{StaticResource NewPencilInputStyle}"
                    Text="{Binding NewPencilLength.Value, Mode=TwoWay,
                           Converter={StaticResource IntToStringConverter}}"/>
 
         <Separator Grid.Column="5" Grid.Row="0" Grid.RowSpan="2"
                    Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
 
-        <Button Grid.Column="6" Grid.Row="0" Grid.RowSpan="2"
+        <Button Grid.Column="8" Grid.Row="0" Grid.RowSpan="2"
                 Content="New Pencil" Command="{Binding NewPencilCommand}"/>
 
     </Grid>
