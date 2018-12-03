@@ -1,0 +1,90 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Pencils.Views"
+                    xmlns:pencils="clr-namespace:Pencils">
+
+    <pencils:IntToStringConverter x:Key="IntToStringConverter"/>
+    
+    <Style TargetType="UserControl" BasedOn="{StaticResource {x:Type UserControl}}"
+           x:Key="MinorSectionStyle">
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Padding" Value="2"/>
+    </Style>
+
+    <Style TargetType="UserControl" BasedOn="{StaticResource MinorSectionStyle}"
+           x:Key="MajorSectionStyle">
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="BorderBrush" Value="Gray"/>
+    </Style>
+
+    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="MaxHeight" Value="40"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Padding" Value="4,2"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+
+    <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}"
+           x:Key="PageContentsStyle">
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Padding" Value="4,2"/>
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="IsReadOnlyCaretVisible" Value="True"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}"
+           x:Key="PencilBaseLabelStyle">
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Padding" Value="4,2"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+
+    <Style TargetType="Label" BasedOn="{StaticResource PencilBaseLabelStyle}"
+           x:Key="PencilStatsLabelStyle">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Width" Value="160"/>
+    </Style>
+
+    <Style TargetType="Label" BasedOn="{StaticResource PencilBaseLabelStyle}"
+           x:Key="PencilActionLabelStyle">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Width" Value="160"/>
+    </Style>
+
+    <Style TargetType="Label" BasedOn="{StaticResource PencilBaseLabelStyle}"
+           x:Key="PencilActionMiniLabelStyle">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Width" Value="100"/>
+    </Style>
+    
+    <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}"
+           x:Key="PencilStatsTextStyle">
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Padding" Value="4,2"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Width" Value="160"/>
+    </Style>
+
+    <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}"
+           x:Key="InputBaseStyle">
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Padding" Value="4,2"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Width" Value="160"/>
+    </Style>
+
+    <Style TargetType="TextBox" BasedOn="{StaticResource InputBaseStyle}"
+           x:Key="PencilActionInputStyle">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+    
+</ResourceDictionary>

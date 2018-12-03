@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="Pencils.Views.PageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Pencils.Views"
+             xmlns:vms="clr-namespace:Pencils.ViewModels"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=vms:WriterViewModel, IsDesignTimeCreatable=False}" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="WriterResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBox Grid.Column="0" Grid.Row="0"
+                 Style="{StaticResource PageContentsStyle}"
+                 Text="{Binding CurrentPage.Value.Contents.Value}"
+                 ToolTip="Change contents with Write/Erase/Edit above"/>
+        <Button Grid.Column="0" Grid.Row="1"
+                Content="New Page" Command="{Binding NewPageCommand}"/>
+    </Grid>
+</UserControl>
